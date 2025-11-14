@@ -3,10 +3,546 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Cool Website</title>
+    <title>Department of Administrative Services</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Times New Roman', serif;
+            background: #f5f5f0;
+            color: #333;
+            transition: all 0.3s ease;
+        }
+
+        /* BORING GOVERNMENT SITE */
+        #public-site {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: #003366;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 4px solid #002244;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            font-weight: normal;
+            letter-spacing: 2px;
+        }
+
+        .header p {
+            font-size: 12px;
+            margin-top: 5px;
+            opacity: 0.8;
+        }
+
+        .nav {
+            background: #e8e8e0;
+            padding: 10px;
+            border-bottom: 2px solid #ccc;
+        }
+
+        .nav a {
+            color: #003366;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 14px;
+        }
+
+        .nav a:hover {
+            text-decoration: underline;
+        }
+
+        .content {
+            background: white;
+            padding: 40px;
+            margin: 20px 0;
+            border: 1px solid #ddd;
+            line-height: 1.8;
+        }
+
+        .content h2 {
+            color: #003366;
+            font-size: 22px;
+            margin-bottom: 15px;
+            font-weight: normal;
+        }
+
+        .content p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 11px;
+            color: #666;
+            border-top: 1px solid #ddd;
+        }
+
+        .seal {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 15px;
+            border: 3px solid white;
+            border-radius: 50%;
+            background: #002244;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            color: white;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        /* Hidden password input */
+        #password-trigger {
+            position: absolute;
+            top: 50px;
+            right: 20px;
+            width: 30px;
+            height: 30px;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        /* SECRET HACKER SITE */
+        #secret-site {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            color: #00ff00;
+            font-family: 'Courier New', monospace;
+            overflow: hidden;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .scanlines {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 255, 0, 0.03),
+                rgba(0, 255, 0, 0.03) 1px,
+                transparent 1px,
+                transparent 2px
+            );
+            pointer-events: none;
+            animation: scanline 8s linear infinite;
+        }
+
+        @keyframes scanline {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(100%); }
+        }
+
+        .terminal {
+            position: relative;
+            z-index: 1;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-shadow: 0 0 5px #00ff00;
+        }
+
+        .terminal-header {
+            border: 2px solid #00ff00;
+            border-bottom: none;
+            padding: 10px;
+            background: rgba(0, 50, 0, 0.5);
+        }
+
+        .terminal-title {
+            font-size: 14px;
+            letter-spacing: 2px;
+        }
+
+        .terminal-body {
+            border: 2px solid #00ff00;
+            padding: 20px;
+            height: calc(100vh - 100px);
+            overflow-y: auto;
+            background: rgba(0, 20, 0, 0.8);
+            box-shadow: inset 0 0 50px rgba(0, 255, 0, 0.1);
+        }
+
+        .blink {
+            animation: blink 1s step-end infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        .ascii-art {
+            font-size: 10px;
+            line-height: 1.2;
+            margin: 20px 0;
+            color: #00aa00;
+        }
+
+        .data-table {
+            margin: 20px 0;
+            width: 100%;
+        }
+
+        .data-row {
+            margin: 10px 0;
+            padding: 10px;
+            border-left: 3px solid #00ff00;
+            background: rgba(0, 255, 0, 0.05);
+        }
+
+        .data-label {
+            color: #00ff00;
+            font-weight: bold;
+        }
+
+        .data-value {
+            color: #00cc00;
+            margin-left: 10px;
+        }
+
+        .classified {
+            color: #ff0000;
+            animation: blink 1.5s ease-in-out infinite;
+        }
+
+        .warning {
+            color: #ffff00;
+            background: rgba(255, 0, 0, 0.2);
+            padding: 15px;
+            border: 2px solid #ff0000;
+            margin: 20px 0;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .exit-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 0, 0, 0.3);
+            border: 2px solid #ff0000;
+            color: #ff0000;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            z-index: 10;
+        }
+
+        .exit-btn:hover {
+            background: rgba(255, 0, 0, 0.5);
+        }
+
+        .typing {
+            overflow: hidden;
+            border-right: 2px solid #00ff00;
+            white-space: nowrap;
+            animation: typing 2s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: #00ff00; }
+        }
+
+        .lego-entry {
+            margin: 15px 0;
+            padding: 15px;
+            border: 1px solid #00ff00;
+            background: rgba(0, 50, 0, 0.3);
+        }
+
+        .set-number {
+            color: #00ffff;
+            font-weight: bold;
+        }
+
+        .release-date {
+            color: #ffff00;
+        }
+
+        .price {
+            color: #00ff00;
+        }
+    </style>
 </head>
 <body>
-    <h1>Welcome to My Cool Website!</h1>
-    <p>A cool website, yo</p>
+    <!-- PUBLIC BORING GOVERNMENT SITE -->
+    <div id="public-site">
+        <div class="header">
+            <div class="seal" onclick="checkClicks()" title="Official Seal">★</div>
+            <h1>DEPARTMENT OF ADMINISTRATIVE SERVICES</h1>
+            <p>United States Government - Office of General Affairs</p>
+        </div>
+
+        <div class="nav">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="services.html">Services</a>
+            <a href="contact.html">Contact</a>
+            <a href="forms.html">Forms</a>
+            <a href="publications.html">Publications</a>
+        </div>
+
+        <div class="content">
+            <h2>Welcome to the Department of Administrative Services</h2>
+            <p>
+                The Department of Administrative Services (DAS) is committed to providing efficient and effective 
+                support services to all federal agencies. Our mission is to streamline administrative processes, 
+                ensure regulatory compliance, and maintain the highest standards of public service.
+            </p>
+            <p>
+                Established in 1947, DAS has been at the forefront of administrative excellence, providing critical 
+                support functions including procurement, facilities management, human resources coordination, and 
+                inter-agency liaison services. We pride ourselves on our dedication to transparency, accountability, 
+                and fiscal responsibility.
+            </p>
+            <p>
+                Our staff of dedicated civil servants work tirelessly to ensure that government operations run 
+                smoothly and efficiently. Through innovative approaches to administrative challenges and a commitment 
+                to continuous improvement, we strive to serve the American people with integrity and professionalism.
+            </p>
+            <p>
+                For inquiries regarding administrative services, please contact your agency liaison officer or 
+                submit a request through the appropriate channels outlined in the Federal Administrative Procedures 
+                Manual (FAPM-2024).
+            </p>
+        </div>
+
+        <div class="footer">
+            <p>Department of Administrative Services | Washington, D.C. 20500</p>
+            <p>Freedom of Information Act | Privacy Policy | Accessibility | No FEAR Act</p>
+            <p>© 2024 United States Government</p>
+        </div>
+
+        <!-- Hidden password trigger (click the seal 7 times) -->
+        <input type="password" id="password-trigger" />
+    </div>
+
+    <!-- SECRET HACKER SITE -->
+    <div id="secret-site">
+        <div class="scanlines"></div>
+        <button class="exit-btn" onclick="exitSecret()">[ EXIT ]</button>
+        
+        <div class="terminal">
+            <div class="terminal-header">
+                <div class="terminal-title">█▓▒░ CLASSIFIED SYSTEM ACCESS ░▒▓█ | CLEARANCE LEVEL: OMEGA</div>
+            </div>
+            <div class="terminal-body">
+                <div class="ascii-art">
+███████╗███████╗ ██████╗██████╗ ███████╗████████╗
+██╔════╝██╔════╝██╔════╝██╔══██╗██╔════╝╚══██╔══╝
+███████╗█████╗  ██║     ██████╔╝█████╗     ██║   
+╚════██║██╔══╝  ██║     ██╔══██╗██╔══╝     ██║   
+███████║███████╗╚██████╗██║  ██║███████╗   ██║   
+╚══════╝╚══════╝ ╚═════╝╚═╝  ╚═╝╚══════╝   ╚═╝   
+                </div>
+
+                <p>&gt; SYSTEM INITIALIZATION... <span class="blink">█</span></p>
+                <p>&gt; CONNECTING TO MAINFRAME...</p>
+                <p>&gt; ACCESS GRANTED</p>
+                <p>&gt; LOADING DATABASE: LEGO_INTELLIGENCE_2025-2027</p>
+                <br>
+
+                <div class="warning">
+                    ⚠ WARNING: UNAUTHORIZED ACCESS TO THIS SYSTEM IS PROHIBITED ⚠<br>
+                    ALL ACTIVITIES ARE MONITORED AND LOGGED<br>
+                    <span class="classified">[ TOP SECRET // NOFORN // EYES ONLY ]</span>
+                </div>
+
+                <p>&gt; DATABASE LOADED. DISPLAYING CLASSIFIED LEGO SET INTELLIGENCE...</p>
+                <br>
+
+                <div class="data-table">
+                    <div class="lego-entry">
+                        <div class="set-number">SET #: 10350</div>
+                        <div><span class="data-label">CODENAME:</span> "MILLENNIUM NEBULA"</div>
+                        <div><span class="data-label">CLASSIFICATION:</span> <span class="classified">TOP SECRET</span></div>
+                        <div><span class="data-label">THEME:</span> Star Wars UCS</div>
+                        <div><span class="data-label">PIECES:</span> 8,426</div>
+                        <div><span class="data-label">RELEASE:</span> <span class="release-date">May 4, 2026</span></div>
+                        <div><span class="data-label">PRICE:</span> <span class="price">$1,199.99 USD</span></div>
+                        <div><span class="data-label">NOTES:</span> Super Star Destroyer - Executor Class. Largest UCS set to date.</div>
+                    </div>
+
+                    <div class="lego-entry">
+                        <div class="set-number">SET #: 21360</div>
+                        <div><span class="data-label">CODENAME:</span> "BLOCK FELLOWSHIP"</div>
+                        <div><span class="data-label">CLASSIFICATION:</span> <span class="classified">SECRET</span></div>
+                        <div><span class="data-label">THEME:</span> Ideas - Lord of the Rings</div>
+                        <div><span class="data-label">PIECES:</span> 5,892</div>
+                        <div><span class="data-label">RELEASE:</span> <span class="release-date">December 15, 2025</span></div>
+                        <div><span class="data-label">PRICE:</span> <span class="price">$549.99 USD</span></div>
+                        <div><span class="data-label">NOTES:</span> Rivendell with light-up features. Includes 15 minifigures.</div>
+                    </div>
+
+                    <div class="lego-entry">
+                        <div class="set-number">SET #: 76989</div>
+                        <div><span class="data-label">CODENAME:</span> "WAYNE MANOR"</div>
+                        <div><span class="data-label">CLASSIFICATION:</span> <span class="classified">CONFIDENTIAL</span></div>
+                        <div><span class="data-label">THEME:</span> DC Batman</div>
+                        <div><span class="data-label">PIECES:</span> 6,713</div>
+                        <div><span class="data-label">RELEASE:</span> <span class="release-date">March 1, 2026</span></div>
+                        <div><span class="data-label">PRICE:</span> <span class="price">$699.99 USD</span></div>
+                        <div><span class="data-label">NOTES:</span> Full Wayne Manor with Batcave. Features motorized vehicle platform.</div>
+                    </div>
+
+                    <div class="lego-entry">
+                        <div class="set-number">SET #: 43265</div>
+                        <div><span class="data-label">CODENAME:</span> "FROZEN KINGDOM"</div>
+                        <div><span class="data-label">CLASSIFICATION:</span> <span class="classified">SECRET</span></div>
+                        <div><span class="data-label">THEME:</span> Disney Castle</div>
+                        <div><span class="data-label">PIECES:</span> 7,234</div>
+                        <div><span class="data-label">RELEASE:</span> <span class="release-date">January 21, 2026</span></div>
+                        <div><span class="data-label">PRICE:</span> <span class="price">$799.99 USD</span></div>
+                        <div><span class="data-label">NOTES:</span> Arendelle Castle with ice palace. Interactive light and sound module.</div>
+                    </div>
+
+                    <div class="lego-entry">
+                        <div class="set-number">SET #: 42185</div>
+                        <div><span class="data-label">CODENAME:</span> "MARS TITAN"</div>
+                        <div><span class="data-label">CLASSIFICATION:</span> <span class="classified">TOP SECRET</span></div>
+                        <div><span class="data-label">THEME:</span> Technic</div>
+                        <div><span class="data-label">PIECES:</span> 4,567</div>
+                        <div><span class="data-label">RELEASE:</span> <span class="release-date">August 15, 2026</span></div>
+                        <div><span class="data-label">PRICE:</span> <span class="price">$449.99 USD</span></div>
+                        <div><span class="data-label">NOTES:</span> SpaceX Starship replica. Fully mechanical with working thrusters.</div>
+                    </div>
+
+                    <div class="lego-entry">
+                        <div class="set-number">SET #: 60388</div>
+                        <div><span class="data-label">CODENAME:</span> "METRO SPRAWL"</div>
+                        <div><span class="data-label">CLASSIFICATION:</span> <span class="classified">CONFIDENTIAL</span></div>
+                        <div><span class="data-label">THEME:</span> City</div>
+                        <div><span class="data-label">PIECES:</span> 9,102</div>
+                        <div><span class="data-label">RELEASE:</span> <span class="release-date">June 1, 2026</span></div>
+                        <div><span class="data-label">PRICE:</span> <span class="price">$399.99 USD</span></div>
+                        <div><span class="data-label">NOTES:</span> Modular city expansion. 32 buildings, working monorail system.</div>
+                    </div>
+
+                    <div class="lego-entry">
+                        <div class="set-number">SET #: 75395</div>
+                        <div><span class="data-label">CODENAME:</span> "CLONE COMMAND"</div>
+                        <div><span class="data-label">CLASSIFICATION:</span> <span class="classified">SECRET</span></div>
+                        <div><span class="data-label">THEME:</span> Star Wars</div>
+                        <div><span class="data-label">PIECES:</span> 3,841</div>
+                        <div><span class="data-label">RELEASE:</span> <span class="release-date">February 14, 2026</span></div>
+                        <div><span class="data-label">PRICE:</span> <span class="price">$349.99 USD</span></div>
+                        <div><span class="data-label">NOTES:</span> Clone Trooper Battle Pack - Deluxe Edition. 24 unique clone variants.</div>
+                    </div>
+
+                    <div class="lego-entry">
+                        <div class="set-number">SET #: 31210</div>
+                        <div><span class="data-label">CODENAME:</span> "RETRO ARCADE"</div>
+                        <div><span class="data-label">CLASSIFICATION:</span> <span class="classified">CONFIDENTIAL</span></div>
+                        <div><span class="data-label">THEME:</span> Creator Expert</div>
+                        <div><span class="data-label">PIECES:</span> 4,923</div>
+                        <div><span class="data-label">RELEASE:</span> <span class="release-date">October 1, 2025</span></div>
+                        <div><span class="data-label">PRICE:</span> <span class="price">$299.99 USD</span></div>
+                        <div><span class="data-label">NOTES:</span> 1980s arcade with working game cabinets (mechanical). LED lighting.</div>
+                    </div>
+                </div>
+
+                <br>
+                <p>&gt; END OF TRANSMISSION</p>
+                <p>&gt; REMEMBER: LOOSE LIPS SINK SHIPS</p>
+                <p>&gt; <span class="blink">█</span></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let clickCount = 0;
+        let lastClickTime = 0;
+
+        function checkClicks() {
+            const currentTime = Date.now();
+            
+            // Reset counter if more than 2 seconds between clicks
+            if (currentTime - lastClickTime > 2000) {
+                clickCount = 0;
+            }
+            
+            clickCount++;
+            lastClickTime = currentTime;
+            
+            // After 7 clicks, show password prompt
+            if (clickCount === 7) {
+                const password = prompt("ENTER ACCESS CODE:");
+                if (password === "BRICK1947" || password === "brick1947") {
+                    document.getElementById('public-site').style.display = 'none';
+                    document.getElementById('secret-site').style.display = 'block';
+                    clickCount = 0;
+                } else if (password !== null) {
+                    alert("ACCESS DENIED");
+                    clickCount = 0;
+                }
+            }
+        }
+
+        function exitSecret() {
+            document.getElementById('secret-site').style.display = 'none';
+            document.getElementById('public-site').style.display = 'block';
+        }
+
+        // Easter egg: Konami code
+        let konamiCode = [];
+        const konamiSequence = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+        
+        document.addEventListener('keydown', function(e) {
+            konamiCode.push(e.key);
+            konamiCode = konamiCode.slice(-10);
+            
+            if (konamiCode.join('') === konamiSequence.join('')) {
+                document.getElementById('public-site').style.display = 'none';
+                document.getElementById('secret-site').style.display = 'block';
+                konamiCode = [];
+            }
+        });
+
+        // Check if redirected with #secret hash
+        if (window.location.hash === '#secret') {
+            document.getElementById('public-site').style.display = 'none';
+            document.getElementById('secret-site').style.display = 'block';
+            window.location.hash = '';
+        }
+    </script>
 </body>
 </html>
